@@ -62,7 +62,6 @@ class FormView extends Component {
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
   }
-
   render() {
     return (
       <div id="add-form">
@@ -75,11 +74,11 @@ class FormView extends Component {
           
           <label>Difficulty<span class="reqstar"> *</span></label>
             <select name="difficulty" onChange={this.handleChange}>
-              <option value="1">🏆</option>
-              <option value="2">🏆🏆</option>
-              <option value="3">🏆🏆🏆</option>
-              <option value="4">🏆🏆🏆🏆</option>
-              <option value="5">🏆🏆🏆🏆🏆</option>
+              <option value="1">★</option>
+              <option value="2">★★</option>
+              <option value="3">★★★</option>
+              <option value="4">★★★★</option>
+              <option value="5">★★★★★</option>
             </select>
           
           <label>Category<span class="reqstar"> *</span></label>
