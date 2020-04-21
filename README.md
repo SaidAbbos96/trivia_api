@@ -72,6 +72,10 @@ createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
+### All test results are saved with the appropriate name in the folder.
+folder for test results files:
+```backend\result_tests```
+
 "Omit the dropdb command the first time you run tests."
 
 
