@@ -35,7 +35,7 @@ frontend/node_modules/
 frontend/build/
 backend/flaskr/__pycache__/
 backend/__pycache__/
-
+demo
 
 
 # End of https://www.gitignore.io/api/windows
