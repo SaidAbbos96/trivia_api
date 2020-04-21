@@ -1,0 +1,3 @@
+We send a request with data to record a new question in the database.:
+Status code: 200
+result: {'success': True}

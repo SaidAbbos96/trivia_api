@@ -17,15 +17,17 @@ class Question extends Component {
     const { question, answer, category, difficulty } = this.props;
     return (
       <div className="Question-holder">
-        <div className="Question">{question}</div>
+        <div className="Question"><img className="category" alt="thisimage" src={`${category.type.toLowerCase()}.svg`}/>  {question}</div>
         <div className="Question-status">
-          <img className="category" src={`${category}.svg`}/>
-          <div className="difficulty">Difficulty: {difficulty}</div>
-          <img src="delete.png" className="delete" onClick={() => this.props.questionAction('DELETE')}/>
           
+        <div className="difficulty">Difficulty: {'🏆'.repeat(difficulty)}</div>
+        <div class="delete-div" onClick={() => this.props.questionAction('DELETE')}>
+       <img src="delete.png" className="delete" alt="thisimage"/>
+          Delete the Quession
+          </div>
         </div>
         <div className="show-answer button"
-            onClick={() => this.flipVisibility()}>
+            onClick={() => this.flipVisibility()}> 
             {this.state.visibleAnswer ? 'Hide' : 'Show'} Answer
           </div>
         <div className="answer-holder">

@@ -9,10 +9,11 @@ class QuestionView extends Component {
   constructor(){
     super();
     this.state = {
+      searchQuery: '',
       questions: [],
       page: 1,
       totalQuestions: 0,
-      categories: {},
+      categories: [],
       currentCategory: null,
     }
   }
@@ -41,7 +42,13 @@ class QuestionView extends Component {
   }
 
   selectPage(num) {
-    this.setState({page: num}, () => this.getQuestions());
+    if (this.state.currentCategory) {
+      this.getByCategory(this.state.currentCategory.id, num)
+    } else if (this.state.searchQuery) {
+      this.submitSearch(this.state.searchQuery, num)
+    } else {
+      this.setState({page: num}, () => this.getQuestions());
+    }
   }
 
   createPagination(){
@@ -58,12 +65,13 @@ class QuestionView extends Component {
     return pageNumbers;
   }
 
-  getByCategory= (id) => {
+  getByCategory= (id, page = 1) => {
     $.ajax({
-      url: `/categories/${id}/questions`, //TODO: update request URL
+      url: `/categories/${id}/questions?page=${page}`, //TODO: update request URL
       type: "GET",
       success: (result) => {
         this.setState({
+          page: page,
           questions: result.questions,
           totalQuestions: result.total_questions,
           currentCategory: result.current_category })
@@ -76,9 +84,9 @@ class QuestionView extends Component {
     })
   }
 
-  submitSearch = (searchTerm) => {
+  submitSearch = (searchTerm, page = 1) => {
     $.ajax({
-      url: `/questions`, //TODO: update request URL
+      url: `/QuestionsSearch?page=${page}`, //TODO: update request URL
       type: "POST",
       dataType: 'json',
       contentType: 'application/json',
@@ -89,9 +97,12 @@ class QuestionView extends Component {
       crossDomain: true,
       success: (result) => {
         this.setState({
+          page: page,
+          searchQuery: searchTerm,
           questions: result.questions,
           totalQuestions: result.total_questions,
-          currentCategory: result.current_category })
+          currentCategory: result.current_category
+        });
         return;
       },
       error: (error) => {
@@ -106,7 +117,7 @@ class QuestionView extends Component {
       if(window.confirm('are you sure you want to delete the question?')) {
         $.ajax({
           url: `/questions/${id}`, //TODO: update request URL
-          type: "DELETE",
+          type: "GET",
           success: (result) => {
             this.getQuestions();
           },
@@ -124,11 +135,12 @@ class QuestionView extends Component {
       <div className="question-view">
         <div className="categories-list">
           <h2 onClick={() => {this.getQuestions()}}>Categories</h2>
-          <ul>
-            {Object.keys(this.state.categories).map((id, ) => (
-              <li key={id} onClick={() => {this.getByCategory(id)}}>
-                {this.state.categories[id]}
-                <img className="category" src={`${this.state.categories[id]}.svg`}/>
+          <ul class="category_ul">
+            {this.state.categories.map((category) => (
+              <li key={category.id} class="category_li" onClick={() => {this.getByCategory(category.id)}}>
+                <img className="category category_images" alt="thisimage" src={`${category.type.toLowerCase()}.svg`}/>
+                {category.type}
+                <span class="countQues"> {category.counter}) ⍨</span>
               </li>
             ))}
           </ul>
@@ -141,7 +153,7 @@ class QuestionView extends Component {
               key={q.id}
               question={q.question}
               answer={q.answer}
-              category={this.state.categories[q.category]} 
+              category={this.state.categories[q.category - 1]}
               difficulty={q.difficulty}
               questionAction={this.questionAction(q.id)}
             />

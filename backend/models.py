@@ -1,10 +1,14 @@
+# Import the necessary components.
 import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
+# Setting up a database connection.
+# _________________________________
 database_name = "trivia"
-database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+database_path = "postgresql://postgres:1111@{}/{}".format('localhost:5432', database_name)
+# database_path = "postgresql://postgres:1111@localhost:5432/trivia"
 
 db = SQLAlchemy()
 

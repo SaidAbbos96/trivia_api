@@ -1,0 +1,3 @@
+# Checking the beginning is a game of random questions.:
+Status code: 200
+result: {'question': {'answer': 'Answer', 'category': 4, 'difficulty': 5, 'id': 67, 'question': 'New question'}, 'success': True}

@@ -1,0 +1,3 @@
+Verify the protection of the write request to the database of empty questions.:
+Status code: 404
+result: {'error': 404, 'message': 'Resource not found', 'success': False}

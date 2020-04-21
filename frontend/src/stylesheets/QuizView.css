@@ -30,7 +30,7 @@
 
 div.button {
     margin-top: 20px;
-    margin-left: calc(50% - 50px);
+    margin: auto;
 }
 
 .quiz-question {
@@ -44,4 +44,37 @@ div.button {
 
 .wrong {
     color: red;
+}
+.play-category {
+    text-align: start;
+    margin: 7px auto;
+    width: 300px;
+    cursor: pointer;
+}
+li.play-category {
+    border-bottom: 3px solid #d51ff9;
+}
+li.play-category:hover {
+    border-bottom: 3px solid #83cdff;
+}
+div.play-category {
+    text-align: center;
+    width: 150px;
+    border-bottom: 3px dashed #d51ff9;
+}
+input.inputQues {
+    width: 300px;
+    margin: auto;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #28e417;
+    margin-bottom: 20px;
+}
+input.submit-guess.button,.next-question.button, .play-again.button {
+    width: 150px;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 5px;
+    margin: auto;
+    margin-top: 15px;
 }

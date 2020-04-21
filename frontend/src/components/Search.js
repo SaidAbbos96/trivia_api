@@ -20,6 +20,7 @@ class Search extends Component {
     return (
       <form onSubmit={this.getInfo}>
         <input
+          class="searInput"
           placeholder="Search questions..."
           ref={input => this.search = input}
           onChange={this.handleInputChange}
@@ -31,3 +32,4 @@ class Search extends Component {
 }
 
 export default Search
+

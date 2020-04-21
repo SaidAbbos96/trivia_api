@@ -11,7 +11,7 @@ class FormView extends Component {
       answer: "",
       difficulty: 1,
       category: 1,
-      categories: {}
+      categories: [],
     }
   }
 
@@ -68,35 +68,30 @@ class FormView extends Component {
       <div id="add-form">
         <h2>Add a New Trivia Question</h2>
         <form className="form-view" id="add-question-form" onSubmit={this.submitQuestion}>
-          <label>
-            Question
+          <label>Question<span class="reqstar"> *</span></label>
             <input type="text" name="question" onChange={this.handleChange}/>
-          </label>
-          <label>
-            Answer
+          <label>Answer<span class="reqstar"> *</span></label>
             <input type="text" name="answer" onChange={this.handleChange}/>
-          </label>
-          <label>
-            Difficulty
+          
+          <label>Difficulty<span class="reqstar"> *</span></label>
             <select name="difficulty" onChange={this.handleChange}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+              <option value="1">🏆</option>
+              <option value="2">🏆🏆</option>
+              <option value="3">🏆🏆🏆</option>
+              <option value="4">🏆🏆🏆🏆</option>
+              <option value="5">🏆🏆🏆🏆🏆</option>
             </select>
-          </label>
-          <label>
-            Category
+          
+          <label>Category<span class="reqstar"> *</span></label>
             <select name="category" onChange={this.handleChange}>
-              {Object.keys(this.state.categories).map(id => {
+              {this.state.categories.map((category) => {
                   return (
-                    <option key={id} value={id}>{this.state.categories[id]}</option>
+                    <option key={category.id} value={category.id}>{category.type}</option>
                   )
                 })}
             </select>
-          </label>
-          <input type="submit" className="button" value="Submit" />
+          
+          <input type="submit" className="button add-button" value="Submit" />
         </form>
       </div>
     );

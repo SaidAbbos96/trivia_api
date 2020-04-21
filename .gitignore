@@ -27,4 +27,15 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#vs kode files
+.vscode 
+
+#npm moduls
+frontend/node_modules/
+frontend/build/
+backend/flaskr/__pycache__/
+backend/__pycache__/
+
+
+
 # End of https://www.gitignore.io/api/windows

@@ -12,7 +12,7 @@ class QuizView extends Component {
         quizCategory: null,
         previousQuestions: [], 
         showAnswer: false,
-        categories: {},
+        categories: [],
         numCorrect: 0,
         currentQuestion: {},
         guess: '',
@@ -35,8 +35,9 @@ class QuizView extends Component {
     })
   }
 
+    
   selectCategory = ({type, id=0}) => {
-    this.setState({quizCategory: {type, id}}, this.getNextQuestion)
+    this.setState({quizCategory: { type, id}}, this.getNextQuestion)
   }
 
   handleChange = (event) => {
@@ -104,18 +105,22 @@ class QuizView extends Component {
           <div className="quiz-play-holder">
               <div className="choose-header">Choose Category</div>
               <div className="category-holder">
+                  
+                  <ul>
                   <div className="play-category" onClick={this.selectCategory}>ALL</div>
-                  {Object.keys(this.state.categories).map(id => {
+                  {this.state.categories.map((category) => {
                   return (
-                    <div
-                      key={id}
-                      value={id}
+                    <li
+                      key={category.id}
+                      value={category.id}
                       className="play-category"
-                      onClick={() => this.selectCategory({type:this.state.categories[id], id})}>
-                      {this.state.categories[id]}
-                    </div>
+                      onClick={() => this.selectCategory(category)}>
+                        <img className="category category_images" alt="thisimage" src={`${category.type.toLowerCase()}.svg`}/>
+                      {category.type}
+                    </li>
                   )
                 })}
+                </ul>
               </div>
           </div>
       )
@@ -131,7 +136,7 @@ class QuizView extends Component {
   }
 
   evaluateAnswer = () => {
-    const formatGuess = this.state.guess.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").toLowerCase()
+    const formatGuess = this.state.guess.replace(/[.,\\/#!$%\\^&\\*;:{}=\-_`~()]/g,"").toLowerCase()
     const answerArray = this.state.currentQuestion.answer.toLowerCase().split(' ');
     return answerArray.includes(formatGuess)
   }
@@ -156,9 +161,11 @@ class QuizView extends Component {
         ? this.renderCorrectAnswer()
         : (
           <div className="quiz-play-holder">
+            <p class="correctScore">You Score: {this.state.numCorrect}</p>
             <div className="quiz-question">{this.state.currentQuestion.question}</div>
+            
             <form onSubmit={this.submitGuess}>
-              <input type="text" name="guess" onChange={this.handleChange}/>
+              <input type="text" name="guess" class="inputQues" onChange={this.handleChange}/>
               <input className="submit-guess button" type="submit" value="Submit Answer" />
             </form>
           </div>
