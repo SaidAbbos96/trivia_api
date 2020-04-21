@@ -95,8 +95,8 @@ Errors are returned as JSON in the following format:<br>
 
 The API will return three types of errors:
 
-* 404 – resource not found
-* 422 – unprocessable
+* 404 â€“ resource not found
+* 422 â€“ unprocessable
 
 
 ### Endpoints
@@ -200,6 +200,79 @@ This endpoint either creates a new question or returns search results.
 
 
 
+2. If search term <strong>is</strong> included in request:
+
+* General:
+  * Searches for questions using search term in JSON request parameters.
+  * Returns JSON object with paginated matching questions.
+* Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm": "which"}'`<br>
 
 
 
+        {
+            "questions": [
+                {
+                    "answer", 
+                    "category", 
+                    "difficulty", 
+                    "id", 
+                    "question""
+                }, 
+		....// Returns all questions matching the keyword.
+            "success": true, 
+            "total_questions": 18
+        }
+
+
+#### GET /categories/\<int:id\>/questions
+
+* General:
+  * Gets questions by category id using url parameters.
+  * Returns JSON object with paginated matching questions.
+* Sample: `curl http://127.0.0.1:5000/categories/1/questions`<br>
+
+
+        {
+            "current_category": "Science", 
+            "questions": [
+                {
+                    "answer", 
+                    "category", 
+                    "difficulty", 
+                    "id", 
+                    "question"
+                }, 
+		.../// Returns the number of questions by agreement of the limit of questions in one page.
+            ], 
+            "success": true, 
+            "total_questions": 18
+        }
+	
+	
+
+#### POST /quizzes
+
+* General:
+  * Allows users to play the quiz game.
+  * Uses JSON request parameters of category and previous questions.
+  * Returns JSON object with random question not among previous questions.
+* Sample: `curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [20, 21],
+                                            "quiz_category": {"type": "Science", "id": "1"}}'`<br>
+
+        {
+            "question": {
+                "answer", 
+                "category", 
+                "difficulty", 
+                "id", 
+                "question"
+            }, 
+            "success": true
+        }
+	
+	
+## Authors
+SaidAbbos. khudoykulov
+abbos.xudoyqulov@gmail.com
+21.04.2020
+This API program is designed for the task of a tutor on the course of udacity fullstack developer.
